@@ -1,0 +1,1204 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DINE MONSTER - 系統介紹</title>
+    <style>
+      :root {
+        --bg: #f6fbff;
+        --bg-2: #eef8ff;
+        --surface: rgba(255, 255, 255, 0.8);
+        --surface-strong: #ffffff;
+        --text: #163042;
+        --muted: #5f7380;
+        --line: rgba(72, 118, 146, 0.12);
+        --primary: #68bfe2;
+        --primary-2: #9adbed;
+        --accent: #ffe08a;
+        --accent-2: #f8b6a8;
+        --shadow: 0 24px 60px rgba(48, 100, 132, 0.12);
+        --shadow-soft: 0 12px 30px rgba(48, 100, 132, 0.08);
+        --radius-xl: 36px;
+        --radius-lg: 28px;
+        --radius-md: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(154, 219, 237, 0.4),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 85% 15%,
+            rgba(255, 224, 138, 0.35),
+            transparent 24%
+          ),
+          linear-gradient(180deg, #f8fcff 0%, #eef8ff 42%, #f7fbff 100%);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+        background-size: 34px 34px;
+        mask-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.18),
+          transparent 88%
+        );
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        position: relative;
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 72px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 18px;
+        z-index: 10;
+        backdrop-filter: blur(22px);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 999px;
+        box-shadow: var(--shadow-soft);
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 24px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .brand-badge {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        background: linear-gradient(
+          135deg,
+          rgba(104, 191, 226, 0.2),
+          rgba(255, 224, 138, 0.35)
+        );
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        flex: 0 0 auto;
+      }
+
+      .brand-badge img {
+        width: 92%;
+        height: 92%;
+        object-fit: contain;
+      }
+
+      .brand-copy h1,
+      .brand-copy p {
+        margin: 0;
+      }
+
+      .brand-copy h1 {
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+      }
+
+      .brand-copy p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        margin-top: 2px;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .nav a {
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        transition: 0.22s ease;
+      }
+
+      .nav a:hover {
+        background: rgba(104, 191, 226, 0.12);
+        color: var(--text);
+        transform: translateY(-1px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        margin-top: 20px;
+      }
+
+      .hero-copy {
+        position: relative;
+        padding: 24px 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(104, 191, 226, 0.14);
+        color: #2b6a84;
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 18px;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 0 6px rgba(104, 191, 226, 0.14);
+      }
+
+      .hero h2 {
+        font-size: clamp(2.4rem, 5vw, 4.6rem);
+        line-height: 0.98;
+        margin: 0;
+        letter-spacing: -0.03em;
+      }
+
+      .hero h2 span {
+        color: #2b6a84;
+      }
+
+      .hero-lead {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.9;
+        max-width: 58ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+        justify-content: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 20px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        transition: 0.22s ease;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .btn-primary {
+        color: #0d465b;
+        background: linear-gradient(135deg, #9adbed, #bde9f5);
+      }
+
+      .btn-secondary {
+        color: #315165;
+        background: rgba(255, 255, 255, 0.85);
+        border-color: rgba(72, 118, 146, 0.12);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 36px rgba(48, 100, 132, 0.14);
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+        width: 100%;
+      }
+
+      .metric {
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 22px;
+        padding: 16px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+        color: #264d61;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.93rem;
+        line-height: 1.55;
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: 560px;
+        border-radius: var(--radius-xl);
+        background:
+          radial-gradient(
+            circle at 20% 18%,
+            rgba(255, 255, 255, 0.96),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 80% 30%,
+            rgba(255, 224, 138, 0.32),
+            transparent 25%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.96),
+            rgba(238, 249, 255, 0.9)
+          );
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .hero-visual::before,
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(10px);
+        opacity: 0.8;
+        z-index: 0;
+      }
+
+      .hero-visual::before {
+        width: 220px;
+        height: 220px;
+        left: -40px;
+        top: -48px;
+        background: rgba(154, 219, 237, 0.52);
+      }
+
+      .hero-visual::after {
+        width: 180px;
+        height: 180px;
+        right: -34px;
+        bottom: 14px;
+        background: rgba(255, 224, 138, 0.46);
+      }
+
+      .hero-stage {
+        position: absolute;
+        inset: 0;
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 18px;
+        z-index: 1;
+      }
+
+      .stage-card {
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .stage-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -18px -22px auto;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(154, 219, 237, 0.42),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .stage-card.hero-monster {
+        grid-row: 1 / span 2;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(
+            circle at 50% 48%,
+            rgba(154, 219, 237, 0.22),
+            transparent 42%
+          ),
+          rgba(255, 255, 255, 0.84);
+      }
+
+      .monster-stack {
+        position: relative;
+        width: min(100%, 420px);
+        height: min(100%, 460px);
+        display: grid;
+        place-items: center;
+      }
+
+      .monster-stack img {
+        position: absolute;
+        object-fit: contain;
+        filter: drop-shadow(0 16px 28px rgba(45, 80, 103, 0.16));
+        animation: float 5.2s ease-in-out infinite;
+      }
+
+      .monster-stack .monster-main {
+        width: 88%;
+        transform: translateY(12px);
+      }
+
+      .monster-stack .monster-baby {
+        width: 36%;
+        left: 5%;
+        bottom: 2%;
+        animation-delay: -1.2s;
+      }
+
+      .monster-stack .monster-egg {
+        width: 34%;
+        right: 2%;
+        top: 6%;
+        animation-delay: -2.8s;
+      }
+
+      .monster-stack .monster-hungry {
+        width: 48%;
+        right: 10%;
+        bottom: 8%;
+        animation-delay: -1.8s;
+      }
+
+      .float-tag {
+        position: absolute;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(255, 255, 255, 0.86);
+        box-shadow: var(--shadow-soft);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #385e72;
+        z-index: 2;
+      }
+
+      .float-tag.one {
+        left: 16px;
+        top: 16px;
+      }
+      .float-tag.two {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .card {
+        background: var(--surface);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.76);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .section-head h3 {
+        margin: 0;
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        letter-spacing: -0.02em;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 60ch;
+      }
+
+      .summary-main,
+      .summary-side,
+      .feature-grid,
+      .pages-grid,
+      .mode-grid,
+      .process-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .summary-main,
+      .summary-side {
+        padding: 28px;
+      }
+
+      .summary-main p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.95;
+        font-size: 1.02rem;
+      }
+
+      .callout {
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-radius: 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(154, 219, 237, 0.24),
+          rgba(255, 224, 138, 0.18)
+        );
+        border: 1px solid rgba(104, 191, 226, 0.14);
+        color: #325366;
+        line-height: 1.8;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .pill {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(72, 118, 146, 0.12);
+        color: #4a6878;
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .side-image {
+        min-height: 280px;
+        border-radius: 30px;
+        background:
+          radial-gradient(
+            circle at 30% 18%,
+            rgba(255, 255, 255, 0.94),
+            transparent 28%
+          ),
+          linear-gradient(
+            160deg,
+            rgba(154, 219, 237, 0.42),
+            rgba(255, 255, 255, 0.78)
+          );
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .side-image img {
+        width: min(86%, 340px);
+        object-fit: contain;
+        filter: drop-shadow(0 18px 24px rgba(45, 80, 103, 0.16));
+        animation: float 5.8s ease-in-out infinite;
+      }
+
+      .section {
+        margin-top: 24px;
+        padding: 28px;
+      }
+
+      .section + .section {
+        margin-top: 18px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .feature-card {
+        padding: 22px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(72, 118, 146, 0.12);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .feature-card .icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 20px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(
+          135deg,
+          rgba(104, 191, 226, 0.18),
+          rgba(255, 224, 138, 0.18)
+        );
+        font-size: 1.5rem;
+      }
+
+      .feature-card h4 {
+        margin: 0;
+        font-size: 1.12rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.85;
+      }
+
+      .feature-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: contain;
+        margin-top: auto;
+        filter: drop-shadow(0 12px 18px rgba(45, 80, 103, 0.12));
+      }
+
+      .pages-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .page-card {
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(72, 118, 146, 0.12);
+        border-radius: 30px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        min-height: 300px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .page-card .copy {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .page-card h4 {
+        margin: 0;
+        font-size: 1.18rem;
+      }
+
+      .page-card p,
+      .page-card li {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+        font-size: 0.98rem;
+      }
+
+      .page-card ul {
+        margin: 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 6px;
+      }
+
+      .page-card .preview {
+        background: linear-gradient(
+          180deg,
+          rgba(242, 249, 255, 1),
+          rgba(228, 244, 251, 1)
+        );
+        padding: 18px;
+        display: grid;
+        place-items: center;
+      }
+
+      .page-card .preview img {
+        width: 100%;
+        height: 100%;
+        max-height: 250px;
+        object-fit: contain;
+        border-radius: 24px;
+        filter: drop-shadow(0 16px 26px rgba(45, 80, 103, 0.16));
+      }
+
+      .mode-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .mode-card {
+        padding: 22px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(72, 118, 146, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mode-card::before {
+        content: "";
+        position: absolute;
+        inset: auto -24px -24px auto;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(104, 191, 226, 0.18),
+          transparent 70%
+        );
+      }
+
+      .mode-card .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        background: linear-gradient(
+          135deg,
+          rgba(104, 191, 226, 0.18),
+          rgba(255, 224, 138, 0.18)
+        );
+        font-weight: 800;
+        color: #355e72;
+        margin-bottom: 14px;
+      }
+
+      .mode-card h4,
+      .process-card h4 {
+        margin: 0 0 10px;
+        font-size: 1.06rem;
+      }
+
+      .mode-card p,
+      .process-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .process-card {
+        padding: 22px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(72, 118, 146, 0.12);
+        min-height: 170px;
+      }
+
+      .process-step {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+        background: linear-gradient(
+          135deg,
+          rgba(154, 219, 237, 0.25),
+          rgba(255, 224, 138, 0.2)
+        );
+        color: #315165;
+        font-weight: 800;
+      }
+
+      .footer {
+        margin-top: 24px;
+        padding: 26px 28px;
+        border-radius: var(--radius-xl);
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(72, 118, 146, 0.12);
+        color: var(--muted);
+        line-height: 1.8;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .footer strong {
+        color: var(--text);
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1.04rem;
+      }
+
+      .floating-note {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        width: 62px;
+        height: 62px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, #9adbed, #c9eff8);
+        color: #0d465b;
+        display: grid;
+        place-items: center;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        font-size: 1.4rem;
+        z-index: 20;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .hero,
+        .summary,
+        .pages-grid,
+        .feature-grid,
+        .mode-grid,
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-visual {
+          min-height: 520px;
+        }
+
+        .page-card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page {
+          width: min(100% - 20px, 1200px);
+          padding-top: 18px;
+        }
+
+        .topbar {
+          border-radius: 28px;
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .nav {
+          justify-content: flex-start;
+        }
+
+        .hero-metrics {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-visual {
+          min-height: 460px;
+        }
+
+        .hero-stage {
+          grid-template-columns: 1fr;
+          grid-template-rows: 1.25fr 0.75fr 0.75fr 0.75fr;
+        }
+
+        .stage-card.hero-monster {
+          grid-row: auto;
+        }
+
+        .summary-main,
+        .summary-side,
+        .section {
+          padding: 20px;
+        }
+
+        .page-card .copy,
+        .feature-card,
+        .mode-card,
+        .process-card {
+          padding: 18px;
+        }
+
+        .floating-note {
+          right: 14px;
+          bottom: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-badge" aria-hidden="true">
+            <img src="260408.png" alt="DINE MONSTER 怪獸標誌" />
+          </div>
+          <div class="brand-copy">
+            <h1>DINE MONSTER</h1>
+            <p>讓怪獸幫你透過美食來交朋友</p>
+          </div>
+        </div>
+        <nav class="nav" aria-label="頁面導覽">
+          <a href="#summary">摘要</a>
+          <a href="#features">核心特色</a>
+          <a href="#pages">頁面展示</a>
+          <a href="#modes">推薦模式</a>
+        </nav>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h2 id="hero-title">DINE MONSTER<br /></h2>
+          <p class="hero-lead">
+            以「吃飽沒？」這句台灣最溫暖的問候為靈感，DINE MONSTER
+            把餐食紀錄、怪獸養成、好友互動與智慧推薦整合在一起。
+            每次拍照上傳，都像是在餵養一隻懂你的怪獸，讓日常飲食變成有陪伴感的故事。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#summary">開始了解系統</a>
+            <a class="btn btn-secondary" href="#pages">查看頁面介面</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <strong>怪獸養成</strong>
+              <span>每張食物照片都會轉換成經驗值與成長資源。</span>
+            </div>
+            <div class="metric">
+              <strong>美食社交</strong>
+              <span>用怪獸作為個人名片，輕鬆開啟朋友之間的話題。</span>
+            </div>
+            <div class="metric">
+              <strong>智慧推薦</strong>
+              <span>結合偏好、朋友與飯群資料，快速決定下一餐。</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="summary" class="summary" aria-labelledby="summary-title">
+        <div class="card summary-main">
+          <div class="section-head">
+            <div>
+              <h3 id="summary-title"></h3>
+              <p>把一個日常問題，變成一個有溫度、有成長感、有社交感的產品。</p>
+            </div>
+          </div>
+          <p>
+            DINE MONSTER
+            的核心初衷，是把「吃飯」從單純的生理需求延伸成更具情緒價值的互動體驗。在台灣，飲食常常伴隨問候、陪伴與連結，因此我們以怪獸作為媒介，將枯燥的紀錄流程轉化為有趣的養成旅程。
+          </p>
+          <p style="margin-top: 14px">
+            使用者拍下每一餐，怪獸就會獲得成長經驗；系統會透過 AI
+            影像辨識分析菜系與口味，慢慢塑造出專屬於你的味覺人格。無論是獨自用餐、與朋友聚餐，或是飯群一起決定下一餐，怪獸都能替你說出那份最真實的飲食喜好。
+          </p>
+          <div class="callout">
+            我們想解決的不只是「要吃什麼？」的選擇障礙，更希望讓朋友、家人與社交圈能透過美食紀錄自然互動，找回吃飯最純粹的快樂。
+          </div>
+          <div class="pill-row" aria-label="產品關鍵字">
+            <span class="pill">療癒經濟</span>
+            <span class="pill">怪獸養成</span>
+            <span class="pill">好友社交</span>
+            <span class="pill">飯群約飯</span>
+            <span class="pill">AI 影像辨識</span>
+            <span class="pill">智慧扭蛋推薦</span>
+          </div>
+        </div>
+        <div class="card summary-side">
+          <div class="side-image">
+            <img src="260408.png" alt="怪獸插畫主視覺" />
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="features"
+        class="section card"
+        aria-labelledby="features-title"
+      >
+        <div class="section-head">
+          <div>
+            <h3 id="features-title">產品介紹</h3>
+            <p>
+              系統不只是記錄飲食，而是把飲食、情緒、關係和推薦機制串成一個完整體驗。
+            </p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="icon">🥚</div>
+            <h4>怪獸養成與進化</h4>
+            <p>
+              食物照片不再只是紀錄，而是餵養怪獸的養成素材。怪獸會隨經驗值成長，並在不同階段展現新的外型與性格。
+            </p>
+            <img src="egg.png" alt="怪獸蛋插畫" />
+          </article>
+          <article class="feature-card">
+            <div class="icon">👥</div>
+            <h4>美食元宇宙社交</h4>
+            <p>
+              怪獸是你的動態名片，能用來加好友、看日常、聊口味，還能把朋友和家人快速拉進同一個美食圈。
+            </p>
+            <img src="baby.png" alt="可愛怪獸插畫" />
+          </article>
+          <article class="feature-card">
+            <div class="icon">🎡</div>
+            <h4>智慧扭蛋推薦</h4>
+            <p>
+              系統會整合個人歷史、朋友偏好、飯群口味與天氣資訊，幫你做出更貼近當下情境的餐廳推薦。
+            </p>
+            <img src="Ahwww.png" alt="怪獸表情插畫" />
+          </article>
+          <article class="feature-card">
+            <div class="icon">✨</div>
+            <h4>高互動性介面</h4>
+            <p>
+              扭蛋、怪獸與資料頁面都採用視覺化與動畫感設計，讓每次操作都像在進行一場輕鬆的療癒體驗。
+            </p>
+            <img src="Hungry.png" alt="主怪獸插畫" />
+          </article>
+        </div>
+      </section>
+
+      <section id="pages" class="section card" aria-labelledby="pages-title">
+        <div class="section-head">
+          <div>
+            <h3 id="pages-title">系統頁面展示</h3>
+            <p>
+              以下四個頁面構成完整使用流程，對應登入、養成、紀錄與推薦四個關鍵場景。
+            </p>
+          </div>
+        </div>
+        <div class="pages-grid">
+          <article class="page-card">
+            <div class="copy">
+              <div>
+                <h4>登入頁面</h4>
+                <p>提供使用者登入系統，並以簡潔、友善的介面建立第一印象。</p>
+              </div>
+              <ul>
+                <li>支援一般登入與第三方登入</li>
+                <li>以輕盈色塊與圓角元件營造親和感</li>
+                <li>讓使用者快速進入主流程</li>
+              </ul>
+            </div>
+            <div class="preview">
+              <img src="login.jpg" alt="登入頁面截圖" />
+            </div>
+          </article>
+
+          <article class="page-card">
+            <div class="copy">
+              <div>
+                <h4>怪獸頁面</h4>
+                <p>
+                  顯示怪獸樣貌與成長狀態，讓使用者一眼看見自己的飲食養成成果。
+                </p>
+              </div>
+              <ul>
+                <li>顯示等級、經驗值與飽足度</li>
+                <li>可查看怪獸型態與名稱</li>
+                <li>將飲食行為轉換成可視化成長</li>
+              </ul>
+            </div>
+            <div class="preview">
+              <img src="monster_page.jpg" alt="怪獸頁面截圖" />
+            </div>
+          </article>
+
+          <article class="page-card">
+            <div class="copy">
+              <div>
+                <h4>食物上傳頁面</h4>
+                <p>提供食物圖片上傳功能，是整個怪獸養成與 AI 分析的起點。</p>
+              </div>
+              <ul>
+                <li>支援拍照上傳與資料編輯</li>
+                <li>串接 AI 辨識分析菜色</li>
+                <li>把日常紀錄變成餵食儀式</li>
+              </ul>
+            </div>
+            <div class="preview">
+              <img src="upload_foodPhoto_page.jpg" alt="食物上傳頁面截圖" />
+            </div>
+          </article>
+
+          <article class="page-card">
+            <div class="copy">
+              <div>
+                <h4>食物推薦頁面</h4>
+                <p>
+                  提供四種推薦模式，並生成餐廳推薦結果，讓使用者快速做出決策。
+                </p>
+              </div>
+              <ul>
+                <li>無登入狀態：隨機推薦</li>
+                <li>個人模式：依個人食物照片推薦</li>
+                <li>朋友模式與飯群模式：整合群體偏好</li>
+              </ul>
+            </div>
+            <div class="preview">
+              <img src="restaurant_result_page.jpg" alt="推薦結果頁面截圖" />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="modes" class="section card" aria-labelledby="modes-title">
+        <div class="section-head">
+          <div>
+            <h3 id="modes-title">推薦模式設計</h3>
+            <p>
+              系統把不同情境切成四種模式，讓推薦邏輯對應單人與群體的真實需求。
+            </p>
+          </div>
+        </div>
+        <div class="mode-grid">
+          <article class="mode-card">
+            <div class="num">01</div>
+            <h4>無登入狀態</h4>
+            <p>
+              隨機推薦餐廳，讓第一次使用的訪客也能快速體驗系統的扭蛋感與驚喜感。
+            </p>
+          </article>
+          <article class="mode-card">
+            <div class="num">02</div>
+            <h4>個人模式</h4>
+            <p>
+              根據個人上傳的食物照片與歷史偏好，推薦最貼近使用者口味的餐廳選項。
+            </p>
+          </article>
+          <article class="mode-card">
+            <div class="num">03</div>
+            <h4>朋友模式</h4>
+            <p>
+              整合個人與朋友的飲食資料，讓怪獸替你們統整共同喜好，降低聚餐討論成本。
+            </p>
+          </article>
+          <article class="mode-card">
+            <div class="num">04</div>
+            <h4>飯群模式</h4>
+            <p>
+              彙整飯群所有成員的飲食足跡與當下情境，幫整個群體推薦最適合的下一餐。
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section card" aria-labelledby="flow-title">
+        <div class="section-head">
+          <div>
+            <h3 id="flow-title">使用流程</h3>
+            <p>
+              把使用者從登入、餵食、查看怪獸，到推薦餐廳的完整路徑整理成簡單流程。
+            </p>
+          </div>
+        </div>
+        <div class="process-grid">
+          <article class="process-card">
+            <div class="process-step">1</div>
+            <h4>登入系統</h4>
+            <p>使用者進入登入頁面，快速開始建立自己的怪獸帳號。</p>
+          </article>
+          <article class="process-card">
+            <div class="process-step">2</div>
+            <h4>上傳食物照片</h4>
+            <p>拍照或上傳餐點，系統就會把這份飲食資料轉成怪獸成長資源。</p>
+          </article>
+          <article class="process-card">
+            <div class="process-step">3</div>
+            <h4>查看怪獸成長</h4>
+            <p>透過怪獸頁面觀察等級、飽足度與形態變化，享受養成的回饋感。</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>
+          <strong>DINE MONSTER</strong>
+          讓怪獸幫你透過美食來交朋友，讓每一次吃飯都變成可分享、可成長、可推薦的體驗。
+        </div>
+        <div>
+          資料夾內圖片已整合為單頁介紹版型，方便直接作為提案展示或專題簡報首頁。
+        </div>
+      </footer>
+    </div>
+
+    <a class="floating-note" href="#hero-title" aria-label="回到頁首">↑</a>
+  </body>
+</html>
